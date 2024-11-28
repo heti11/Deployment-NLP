@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAT-PAM: SMS Aman Tanpa sPAM</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { color: #333; }
+        p { margin: 10px 0; }
+        .info-section, .team-section { margin-top: 20px; }
+        .team-member { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Orbit Future Academy</h1>
+
+    <div class="info-section">
+        <h2>INFORMASI APLIKASI</h2>
+        <h3>SAT-PAM: SMS Aman Tanpa sPAM</h3>
+        <p>Aplikasi ini dibuat untuk mendeteksi SMS spam seperti penipuan atau fraud yang banyak meresahkan masyarakat. SMS yang masuk ke perangkat pengguna akan diklasifikasikan apakah pesan tersebut wajar, promo, atau penipuan. Dengan SAT-PAM, pengguna dapat merasa aman dari SMS yang berisi penipuan.</p>
+        <button onclick="startApp()">Mulai</button>
+    </div>
+
+    <div class="team-section">
+        <h2>ANGGOTA KELOMPOK</h2>
+        <div class="team-member">BUDI - Universitas Sumatera</div>
+        <div class="team-member">AYU - Universitas Jawa dan Bali</div>
+        <div class="team-member">TONO - Universitas Kalimantan</div>
+        <div class="team-member">PUTRA - Universitas Sulawesi</div>
+        <div class="team-member">PUTRI - Universitas Kepulauan Nusa, Maluku, dan Papua</div>
+    </div>
+
+    <footer>
+        <p>Orbit Future Academy</p>
+        <p><a href="https://orbitfutureacademy.id">orbitfutureacademy.id</a></p>
+    </footer>
+
+    <script>
+        function startApp() {
+            // Ambil input dari pengguna
+            const textInput = prompt("Masukkan teks untuk deteksi:");  
+
+            if (textInput) {
+                // Kirim data ke server Flask untuk deteksi
+                fetch('/api/deteksi', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `data=${encodeURIComponent(textInput)}`,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Tampilkan hasil prediksi
+                    alert(`Hasil deteksi: ${data.data}`);
+                })
+                .catch(error => {
+                    console.error('Terjadi kesalahan:', error);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
